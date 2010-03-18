@@ -1,0 +1,7 @@
+*.sqlite3
+*.swp
+*.tmp
+rerun.txt
+config/database.yml
+tmp/*
+log/*
