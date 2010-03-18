@@ -1,0 +1,16 @@
+<h1>Editing round</h1>
+
+<% form_for(@round) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :game_id %><br />
+    <%= f.text_field :game_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @round %> |
+<%= link_to 'Back', rounds_path %>
