@@ -1,0 +1,8 @@
+%h2 New game
+
+- form_for(@game) do |f|
+  = f.error_messages
+
+  %p= f.submit 'Create'
+
+= link_to 'Back', games_path
