@@ -27,4 +27,9 @@ describe Game, :type => :model do
     game = Game.create(:name => 'Mexican Trains', :slug => 'mexican_trains')
     game.should have(1).errors_on(:slug)
   end
+
+  it 'should have many game plays' do
+    game = Game.create(:name => 'Mexican Trains', :slug => 'mexican-trains')
+    game.game_plays.should be_an_instance_of(Array)
+  end
 end
