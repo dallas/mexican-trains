@@ -11,4 +11,7 @@
 #
 
 class Game < ActiveRecord::Base
+  validates_presence_of :name, :slug
+  validates_uniqueness_of :name, :slug, :allow_blank => true
+  validates_format_of :slug, :with => /^[A-Za-z0-9-]+$/, :allow_blank => true
 end
