@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20100325032448) do
 
   create_table "scores", :force => true do |t|
     t.integer  "round_id"
+    t.integer  "player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
