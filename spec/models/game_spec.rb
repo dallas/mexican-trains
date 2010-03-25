@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Game, :type => :model do
+describe Game do
   it 'should create a new instance given valid attributes' do
     Game.create!(:name => 'Mexican Trains', :slug => 'mexican-trains')
   end
@@ -31,5 +31,6 @@ describe Game, :type => :model do
   it 'should have many game plays' do
     Game.reflections.should have_key(:game_plays)
     Game.reflections[:game_plays].macro.should eql(:has_many)
+    Game.new.game_plays.should be_an_instance_of(Array)
   end
 end

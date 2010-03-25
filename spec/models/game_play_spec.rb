@@ -8,6 +8,7 @@ describe GamePlay do
   it 'should belong to a Game record' do
     GamePlay.reflections.should have_key(:game)
     GamePlay.reflections[:game].macro.should eql(:belongs_to)
+    GamePlay.new(:game => Factory(:game)).game.should be_an_instance_of(Game)
   end
 
   it 'should require an associated Game record' do
