@@ -5,7 +5,7 @@ describe GamePlay do
     GamePlay.create!(:game_id => 1)
   end
 
-  it 'should belong to a Game' do
+  it 'should belong to a Game record' do
     GamePlay.reflections.should have_key(:game)
     GamePlay.reflections[:game].macro.should eql(:belongs_to)
   end
