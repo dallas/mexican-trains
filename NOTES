@@ -1,0 +1,5 @@
+[03-21-2010]
+    • All kinds of great BDD test writing and then coding.
+    • Model association path should go something like:
+        Game.has_many » GamePlay.has_many » Round.has_many » Score.belongs_to » Player
+        Player.has_many » Score.belongs_to » Round.belongs_to » GamePlay.belongs_to » Game
