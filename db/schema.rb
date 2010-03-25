@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100325030345) do
+ActiveRecord::Schema.define(:version => 20100325032448) do
 
   create_table "game_plays", :force => true do |t|
     t.integer  "game_id"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(:version => 20100325030345) do
 
   create_table "rounds", :force => true do |t|
     t.integer  "game_play_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "round_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
