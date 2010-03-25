@@ -11,4 +11,7 @@
 
 class GamePlay < ActiveRecord::Base
   belongs_to :game
+  has_many :rounds
+
+  validates_presence_of :game_id
 end
