@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Score do
   it 'should create a new instance given valid attributes' do
-    Score.create!(:round_id => 1, :player_id => 1)
+    Score.create!(:round_id => 1, :player_id => 1, :score => 1)
   end
 
   it 'should belong to a Round record' do
