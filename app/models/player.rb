@@ -1,24 +1,41 @@
 # == Schema Information
-# Schema version: 20100325033303
 #
 # Table name: players
 #
-#  id         :integer         not null, primary key
-#  first_name :string(255)
-#  last_name  :string(255)
-#  nickname   :string(255)
-#  mo         :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer         not null, primary key
+#  first_name         :string(255)     not null
+#  last_name          :string(255)     not null
+#  mo                 :string(255)
+#  login              :string(255)     not null
+#  email              :string(255)     not null
+#  crypted_password   :string(255)     not null
+#  password_salt      :string(255)     not null
+#  persistence_token  :string(255)     not null
+#  perishable_token   :string(255)     not null
+#  login_count        :integer         default(0)
+#  failed_login_count :integer         default(0), not null
+#  last_request_at    :datetime
+#  current_login_at   :datetime
+#  last_login_at      :datetime
+#  current_login_ip   :string(255)
+#  last_login_ip      :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 class Player < ActiveRecord::Base
+  acts_as_authentic do |config|
+    config.validate_email_field false
+    config.merge_validates_format_of_login_field_options({
+      :with => /^[a-z-]+$/,
+      :message => 'should use only letters and “-”'
+    })
+  end
+
   has_many :rounds
   has_many :game_plays
 
-  validates_presence_of :first_name, :last_name, :nickname
-  validates_format_of :nickname, :with => /^[a-z-]+$/, :allow_blank => true
-  validates_uniqueness_of :nickname
+  validates_presence_of :first_name, :last_name
 
   def name
     "#{first_name} #{last_name}"

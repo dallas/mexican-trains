@@ -39,3 +39,15 @@ describe Game do
     Game.new.game_plays.should be_an_instance_of(Array)
   end
 end
+
+# == Schema Information
+#
+# Table name: games
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  slug       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

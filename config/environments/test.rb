@@ -27,9 +27,10 @@ config.action_mailer.delivery_method = :test
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
+config.gem 'spork',           :version => '0.8.2',  :lib => false
 config.gem 'ZenTest',         :version => '4.2.1',  :lib => false
 config.gem 'autotest-rails',  :version => '4.1.0',  :lib => false
 config.gem 'rspec',           :version => '1.3.0',  :lib => false
 config.gem 'rspec-rails',     :version => '1.3.2',  :lib => false
-config.gem 'factory_girl',    :version => '1.2.3'#,  :lib => false
-config.gem 'forgery',         :version => '0.3.0'#,  :lib => false
+config.gem 'factory_girl',    :version => '1.2.3'
+config.gem 'forgery',         :version => '0.3.0'

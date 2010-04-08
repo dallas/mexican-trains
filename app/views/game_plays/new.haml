@@ -1,0 +1,7 @@
+%h2 Start a new game of Mexican Trains!
+
+%h3 Add Players:
+
+- for player in @players
+  = check_box_tag "add_player[#{player.id}]"
+  = label_tag "add_player_#{player.id}", player.name

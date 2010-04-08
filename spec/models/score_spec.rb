@@ -25,3 +25,16 @@ describe Score do
     score.should have(1).error_on(:player_id)
   end
 end
+
+# == Schema Information
+#
+# Table name: scores
+#
+#  id         :integer         not null, primary key
+#  round_id   :integer
+#  player_id  :integer
+#  score      :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
