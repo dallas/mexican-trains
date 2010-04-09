@@ -27,4 +27,26 @@ class ApplicationController < ActionController::Base
       return @current_player_session if defined?(@current_player_session)
       @current_player_session = PlayerSession.find
     end
+
+    # Stores (in session) a location to return to after an upcoming redirection. If no location
+    # is given, the URL location of the current GET request is used. If the current request is not
+    # a GET, the referring request (assumed a GET) is used.
+    def store_location(location = nil)
+      session[:return_to] = location || (request.get? ? request.request_uri : request.env['HTTP_REFERER'])
+    end
+
+    # Works in conjunction with the +store_location+ method. If a stored location exists, this
+    # will redirect to that location. Otherwise, the redirection will target the given location
+    # argument. That location is optional and defaults to the root path (home page).
+    def redirect_back_or_default(default = root_path)
+      redirect_to(clear_location || default)
+    end
+
+    # Clears any session location kept by the +store_location+ method and returns the value that
+    # was cleared or +nil+ if nothing was stored.
+    def clear_location
+      return_to = session[:return_to].try(:dup)
+      session[:return_to] = nil
+      return_to
+    end
 end

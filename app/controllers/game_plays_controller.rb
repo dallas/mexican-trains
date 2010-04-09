@@ -2,6 +2,7 @@ class GamePlaysController < ApplicationController
   load_and_authorize_resource
 
   def new
+    store_location
     @game = Game.first
     @game_play = GamePlay.new
     @players = Player.all

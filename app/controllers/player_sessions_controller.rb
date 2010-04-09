@@ -8,7 +8,7 @@ class PlayerSessionsController < ApplicationController
   def create
     @player_session = PlayerSession.new(params[:player_session])
     if @player_session.save
-      redirect_to root_url
+      redirect_back_or_default
     else
       render :action => :new
     end

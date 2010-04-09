@@ -2,6 +2,14 @@
 
 %h3 Add Players:
 
-- for player in @players
-  = check_box_tag "add_player[#{player.id}]"
-  = label_tag "add_player_#{player.id}", player.name
+- form_for @game_play, :url => game_play_path do |f|
+  - for player in @players
+    %p
+      = f.check_box :player_ids, :value => player.id
+      = f.label :player_ids, player.name
+
+  = link_to 'Register New Player', new_player_path
+
+  %p
+    = f.submit 'Start the Game!'
+

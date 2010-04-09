@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :players
+
+  map.resource :game_play
+
+  map.root :controller => :game_plays, :action => :new
+
   map.with_options :controller => :player_sessions do |session|
     session.login 'login.:format',
       :action     => :new,
@@ -10,8 +16,4 @@ ActionController::Routing::Routes.draw do |map|
       :action     => :logout,
       :conditions => {:method => :delete}
   end
-
-  map.resource :game_play
-
-  map.root :controller => :game_plays, :action => :new
 end
