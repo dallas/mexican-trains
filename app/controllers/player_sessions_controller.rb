@@ -16,6 +16,6 @@ class PlayerSessionsController < ApplicationController
 
   def destroy
     current_player_session.destroy
-    redirect_to new_player_session_url
+    redirect_to login_url
   end
 end

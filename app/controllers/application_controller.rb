@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :email, :login, :password
 
+  helper_method :current_player
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
     redirect_to login_path
@@ -24,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def current_game_play
     return @current_game_play if defined?(@current_game_play)
-    @current_game_play = GamePlay.find(session[:game_play_id])
+    @current_game_play = GamePlay.find_by_id(session[:game_play_id])
   end
 
   private

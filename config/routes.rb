@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
       :action     => :create,
       :conditions => {:method => :post}
     session.logout 'logout.:format',
-      :action     => :logout,
+      :action     => :destroy,
       :conditions => {:method => :delete}
   end
 end
