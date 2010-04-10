@@ -7,7 +7,7 @@
 #  last_name          :string(255)     not null
 #  mo                 :string(255)
 #  login              :string(255)     not null
-#  email              :string(255)     not null
+#  email              :string(255)
 #  crypted_password   :string(255)     not null
 #  password_salt      :string(255)     not null
 #  persistence_token  :string(255)     not null
@@ -32,8 +32,8 @@ class Player < ActiveRecord::Base
     })
   end
 
-  has_many :rounds
-  has_many :game_plays
+  has_many :scores
+  has_many :rounds, :through => :scores
 
   validates_presence_of :first_name, :last_name
 
@@ -43,5 +43,9 @@ class Player < ActiveRecord::Base
 
   def name=(names)
     self.first_name, self.last_name = names.split(' ', 2)
+  end
+
+  def game_plays
+    rounds.map(&:game_play).uniq
   end
 end

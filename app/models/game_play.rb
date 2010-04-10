@@ -15,20 +15,21 @@ class GamePlay < ActiveRecord::Base
 
   validates_presence_of :game_id
 
-  after_initialize :new_round
-
-  def players
-    rounds.first.scores.map(&:player)
+  def player_ids=(ids)
+    ids.reject(&:blank?).each do |id|
+      current_round.scores.build :player => Player.find(id)
+    end
   end
 
-  def player_ids=(ids)
-    round = new_round
-    Player.find(ids).each do |player|
-      round.scores.build(:player => player)
-    end
+  def players
+    current_round.scores.map &:player
   end
 
   def new_round
     rounds.build
+  end
+
+  def current_round
+    @current_round ||= rounds.last || new_round
   end
 end

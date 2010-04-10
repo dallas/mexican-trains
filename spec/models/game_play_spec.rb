@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: game_plays
+#
+#  id         :integer         not null, primary key
+#  game_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe GamePlay do
@@ -21,14 +31,3 @@ describe GamePlay do
     GamePlay.reflections[:rounds].macro.should eql(:has_many)
   end
 end
-
-# == Schema Information
-#
-# Table name: game_plays
-#
-#  id         :integer         not null, primary key
-#  game_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
-

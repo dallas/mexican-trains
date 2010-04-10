@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  filter_parameter_logging :login, :password
+  filter_parameter_logging :email, :login, :password
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
   def current_player
     return @current_player if defined?(@current_player)
     @current_player = current_player_session && current_player_session.player
+  end
+
+  def current_game_play
+    return @current_game_play if defined?(@current_game_play)
+    @current_game_play = GamePlay.find(session[:game_play_id])
   end
 
   private

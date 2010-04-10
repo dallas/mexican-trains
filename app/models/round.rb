@@ -14,5 +14,5 @@ class Round < ActiveRecord::Base
   has_many :scores
   has_many :players, :through => :scores
 
-  validates_presence_of :game_play_id
+  # validates_presence_of :game_play_id
 end

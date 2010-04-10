@@ -3,10 +3,11 @@
 %h3 Add Players:
 
 - form_for @game_play, :url => game_play_path do |f|
+  = f.error_messages
   - for player in @players
     %p
-      = f.check_box :player_ids, :value => player.id
-      = f.label :player_ids, player.name
+      = check_box_tag 'game_play[player_ids][]', player.id, false, :id => "game_play_player_ids_#{player.id}"
+      = f.label "player_ids_#{player.id}", player.name
 
   = link_to 'Register New Player', new_player_path
 

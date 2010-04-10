@@ -15,5 +15,6 @@ class Score < ActiveRecord::Base
   belongs_to :round
   belongs_to :player
 
-  validates_presence_of :round_id, :player_id
+  # validates_presence_of :round_id
+  validates_presence_of :player_id
 end

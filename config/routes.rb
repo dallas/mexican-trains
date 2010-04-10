@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :players
 
-  map.resource :game_play
+  map.resource :game_play, :as => 'game-in-progress'
 
   map.root :controller => :game_plays, :action => :new
 
