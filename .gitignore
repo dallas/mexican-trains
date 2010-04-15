@@ -5,3 +5,4 @@ rerun.txt
 config/database.yml
 tmp/*
 log/*
+public/stylesheets/*.css
