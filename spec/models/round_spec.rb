@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: rounds
-#
-#  id           :integer         not null, primary key
-#  game_play_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 require 'spec_helper'
 
 describe Round do
@@ -30,3 +20,15 @@ describe Round do
     Round.reflections[:scores].macro.should eql(:has_many)
   end
 end
+
+# == Schema Information
+#
+# Table name: rounds
+#
+#  id           :integer         not null, primary key
+#  game_play_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  double       :integer
+#
+

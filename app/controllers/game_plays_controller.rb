@@ -12,6 +12,7 @@ class GamePlaysController < ApplicationController
     @game_play = GamePlay.new(params.fetch('game_play', {}).merge(:game => Game.first))
     if @game_play.save
       session[:game_play_id] = @game_play.id
+      @game_play.next_round!
       redirect_to game_play_url
     else
       @players = Player.all
