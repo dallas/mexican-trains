@@ -1,8 +1,8 @@
 class CreateRounds < ActiveRecord::Migration
   def self.up
     create_table :rounds do |t|
-      t.integer :game_play_id
-
+      t.integer :game_id
+      t.integer :double
       t.timestamps
     end
   end

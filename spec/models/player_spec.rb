@@ -1,4 +1,5 @@
 # == Schema Information
+# Schema version: 20100325033303
 #
 # Table name: players
 #

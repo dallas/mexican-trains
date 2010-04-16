@@ -1,4 +1,5 @@
 # == Schema Information
+# Schema version: 20100325033303
 #
 # Table name: players
 #
@@ -45,7 +46,7 @@ class Player < ActiveRecord::Base
     self.first_name, self.last_name = names.split(' ', 2)
   end
 
-  def game_plays
-    rounds.map(&:game_play).uniq
+  def games
+    rounds.map(&:game).uniq
   end
 end

@@ -1,11 +1,15 @@
+# == Schema Information
+# Schema version: 20100325033303
+#
 # Table name: rounds
 #
-#  id           :integer         not null, primary key
-#  game_play_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id         :integer         not null, primary key
+#  game_id    :integer
+#  double     :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 Factory.define :round do |r|
-  r.game_play { Factory(:game_play) }
+  r.game { Factory(:game) }
 end

@@ -60,11 +60,8 @@ Spork.prefork do
     #
     # For more information take a look at Spec::Runner::Configuration and Spec::Runner
   end
-
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
-  
 end

@@ -1,19 +1,15 @@
 # == Schema Information
-# Schema version: 20100321234513
+# Schema version: 20100325033303
 #
-# Table name: game_plays
+# Table name: games
 #
 #  id         :integer         not null, primary key
-#  game_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class GamePlay < ActiveRecord::Base
-  belongs_to :game
+class Game < ActiveRecord::Base
   has_many :rounds, :order => 'double desc'
-
-  validates_presence_of :game_id
 
   def player_ids=(ids)
     ids.reject(&:blank?).each do |id|

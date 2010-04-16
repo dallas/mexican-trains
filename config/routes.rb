@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :players
 
-  map.resource :game_play, :as => 'game-in-progress'
+  map.resource :game
 
-  map.root :controller => :game_plays, :action => :new
+  map.root :controller => :games, :action => :new
 
   map.with_options :controller => :player_sessions do |session|
     session.login 'login.:format',

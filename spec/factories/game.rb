@@ -1,11 +1,12 @@
-# Table name: game_plays
+# == Schema Information
+# Schema version: 20100325033303
+#
+# Table name: games
 #
 #  id         :integer         not null, primary key
-#  game_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-Factory.define :game_play do |gp|
-  gp.game { Factory(:game) }
+Factory.define :game do |g|
 end

@@ -19,14 +19,14 @@ class ApplicationController < ActionController::Base
     Ability.new current_player
   end
 
+  def current_game
+    return @current_game if defined?(@current_game)
+    @current_game = Game.find_by_id(session[:game_id])
+  end
+
   def current_player
     return @current_player if defined?(@current_player)
     @current_player = current_player_session && current_player_session.player
-  end
-
-  def current_game_play
-    return @current_game_play if defined?(@current_game_play)
-    @current_game_play = GamePlay.find_by_id(session[:game_play_id])
   end
 
   private

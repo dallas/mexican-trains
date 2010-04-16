@@ -1,20 +1,19 @@
 # == Schema Information
+# Schema version: 20100325033303
 #
 # Table name: rounds
 #
-#  id           :integer         not null, primary key
-#  game_play_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  double       :integer
+#  id         :integer         not null, primary key
+#  game_id    :integer
+#  double     :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class Round < ActiveRecord::Base
-  belongs_to :game_play
+  belongs_to :game
   has_many :scores
   has_many :players, :through => :scores
 
   accepts_nested_attributes_for :scores, :reject_if => proc{|a| a.all? {|_,v| v.blank? } }
-
-  # validates_presence_of :game_play_id
 end

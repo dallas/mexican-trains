@@ -1,14 +1,14 @@
-%h2= "Playing #{@game_play.game.name}"
-%h3= "With #{@game_play.players.map(&:name).to_sentence}"
+%h2= "Playing Mexican Trains"
+%h3= "With #{@game.players.map(&:name).to_sentence}"
 
 %table.game-play{:border => 0, :cellpadding => 0, :cellspacing => 0}
   %thead
     %tr
       %th.round Double
-      - for player in @game_play.players.sort_by(&:login)
+      - for player in @game.players.sort_by(&:login)
         %th.player= player.login
   %tbody
-    -  for round in @game_play.rounds
+    -  for round in @game.rounds
       %tr
         %td.round= round.double
         - for score in round.scores.sort_by {|s| s.player.login}

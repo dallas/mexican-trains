@@ -1,19 +1,19 @@
-class GamePlaysController < ApplicationController
-  before_filter :load_game_play, :only => [:show, :edit, :update]
+class GamesController < ApplicationController
+  before_filter :load_game, :only => [:show, :edit, :update]
   load_and_authorize_resource
 
   def new
     store_location
-    @players    = Player.all
-    @game_play  = GamePlay.new
+    @players  = Player.all
+    @game     = Game.new
   end
 
   def create
-    @game_play = GamePlay.new(params.fetch('game_play', {}).merge(:game => Game.first))
-    if @game_play.save
-      session[:game_play_id] = @game_play.id
-      @game_play.next_round!
-      redirect_to game_play_url
+    @game = Game.new params[:game]
+    if @game.save
+      session[:game_id] = @game.id
+      @game.start!
+      redirect_to game_url
     else
       @players = Player.all
       render :new
@@ -30,8 +30,7 @@ class GamePlaysController < ApplicationController
   end
 
   private
-    def load_game_play
-      @game_play = current_game_play
-      redirect_to new_game_play_url if @game_play.nil?
+    def load_game
+      redirect_to new_game_url unless @game = current_game
     end
 end
