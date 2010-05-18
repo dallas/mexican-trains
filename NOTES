@@ -1,5 +1,14 @@
 [03-21-2010]
-    • All kinds of great BDD test writing and then coding.
-    • Model association path should go something like:
-        Game.has_many » GamePlay.has_many » Round.has_many » Score.belongs_to » Player
-        Player.has_many » Score.belongs_to » Round.belongs_to » GamePlay.belongs_to » Game
+  • All kinds of great BDD test writing and then coding.
+  • Model association path should go something like:
+    Game.has_many » GamePlay.has_many » Round.has_many » Score.belongs_to » Player
+    Player.has_many » Score.belongs_to » Round.belongs_to » GamePlay.belongs_to » Game
+[05-18-2010]
+  • New model association structure:
+    Game  .has_many   :rounds
+    Round .has_many   :scores
+          .belongs_to :game
+    Scores.belongs_to :round
+          .belongs_to :player
+    Player.has_many   :scores
+          
