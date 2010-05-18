@@ -34,7 +34,6 @@ class Player < ActiveRecord::Base
   end
 
   has_many :scores
-  has_many :rounds, :through => :scores
 
   validates_presence_of :first_name, :last_name
 
@@ -46,7 +45,7 @@ class Player < ActiveRecord::Base
     self.first_name, self.last_name = names.split(' ', 2)
   end
 
-  def games
-    rounds.map(&:game).uniq
+  def score_for(game)
+    Score.all(:joins => [{:round => :game}, :player], :conditions => {:player_id => self.id, :rounds => {:game_id => game.id}}).sum(&:score)
   end
 end

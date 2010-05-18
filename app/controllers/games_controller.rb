@@ -12,7 +12,6 @@ class GamesController < ApplicationController
     @game = Game.new params[:game]
     if @game.save
       session[:game_id] = @game.id
-      @game.start!
       redirect_to game_url
     else
       @players = Player.all

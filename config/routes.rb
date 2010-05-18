@@ -1,9 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :players
+  map.resource :game, :only => [:show, :new, :create] do |game|
+    game.resources :rounds, :only => [:index, :show, :update], :name_prefix => nil
+  end
 
-  map.resource :game
-
-  map.root :controller => :games, :action => :new
+  map.resources :players do |player|
+    player.resources :scores, :only => [:index, :show]
+  end
 
   map.with_options :controller => :player_sessions do |session|
     session.login 'login.:format',
@@ -16,4 +18,6 @@ ActionController::Routing::Routes.draw do |map|
       :action     => :destroy,
       :conditions => {:method => :delete}
   end
+
+  map.root :controller => :games, :action => :new
 end

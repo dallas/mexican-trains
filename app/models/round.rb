@@ -13,7 +13,10 @@
 class Round < ActiveRecord::Base
   belongs_to :game
   has_many :scores
-  has_many :players, :through => :scores
 
-  accepts_nested_attributes_for :scores, :reject_if => proc{|a| a.all? {|_,v| v.blank? } }
+  accepts_nested_attributes_for :scores
+
+  def score_for(player)
+    scores.find_by_player_id(player.id)
+  end
 end

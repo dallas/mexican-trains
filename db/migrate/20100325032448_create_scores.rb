@@ -3,7 +3,7 @@ class CreateScores < ActiveRecord::Migration
     create_table :scores do |t|
       t.integer :round_id
       t.integer :player_id
-      t.integer :score
+      t.integer :score,     :default => 0, :null => false
       t.timestamps
     end
   end

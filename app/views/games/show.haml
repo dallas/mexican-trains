@@ -1,15 +1,13 @@
 %h2= "Playing Mexican Trains"
 %h3= "With #{@game.players.map(&:name).to_sentence}"
 
-%table.game-play{:border => 0, :cellpadding => 0, :cellspacing => 0}
-  %thead
-    %tr
-      %th.round Double
-      - for player in @game.players.sort_by(&:login)
-        %th.player= player.login
-  %tbody
-    -  for round in @game.rounds
-      %tr
-        %td.round= round.double
-        - for score in round.scores.sort_by {|s| s.player.login}
-          %td.score= score.score
+%p#currentDouble= "Current Double: #{@game.current_round.double}"
+
+- form_for @game.current_round do |f|
+  %ul.players
+  - f.fields_for :scores do |s|
+    %li[s.object.player]
+      %span= s.object.player.login
+      %span= @game.score_for s.object.player
+      %p= s.text_field :score
+  %p= f.submit @game.current_round.double.zero? ? 'End Game' : 'Next Round'

@@ -10,10 +10,11 @@
 
 class Game < ActiveRecord::Base
   has_many :rounds, :order => 'double desc'
+  has_many :scores, :through => :rounds
 
-  def player_ids=(ids)
-    ids.reject(&:blank?).each do |id|
-      current_round.scores.build :player => Player.find(id)
+  def player_ids=(player_ids)
+    player_ids.each do |player_id|
+      current_round.scores.build :player_id => player_id
     end
   end
 
@@ -21,37 +22,25 @@ class Game < ActiveRecord::Base
     current_round.scores.map &:player
   end
 
-  def next_round(*players)
-    return if ended?
-    rounds.build(
-      :double => (rounds.last.try(:double) || 13) - 1,
-      :scores_attributes => players.compact.map {|p| [{:player => p}] }
-    )
+  def winner
+    players.min {|a,b| a.score_for(self) <=> b.score_for(self)}
   end
 
-  def next_round!(*players)
-    return if ended?
-    next_round(*players).save
+  def score_for(player)
+    Score.all(:joins => [{:round => :game}, :player], :conditions => {:player_id => player.id, :rounds => {:game_id => self.id}}).sum(&:score)
+  end
+
+  def new_round(double = nil)
+    double ||= (rounds.last.try(:double) || 13) - 1
+    return if double < 0
+    rounds.build :double => double
+  end
+
+  def last_round
+    rounds.last
   end
 
   def current_round
-    @current_round ||= rounds.last
-  end
-
-  def build_all_rounds
-    players = self.players
-    13.times do |n|
-      attrs = {:double => 12 - n}
-      rounds.build(attrs) unless rounds.exists?(attrs)
-      players.each do |player|
-        rounds.each do |round|
-          round.scores.build(:score => 0, :player => player) unless round.scores.exists?(:player_id => player.id)
-        end
-      end
-    end
-  end
-
-  def ended?
-    rounds.last.try(:double) == 0
+    @current_round ||= last_round || new_round
   end
 end
