@@ -1,8 +1,9 @@
 *.sqlite3
 *.swp
 *.tmp
-rerun.txt
 config/database.yml
-tmp/*
+design
 log/*
 public/stylesheets/*.css
+rerun.txt
+tmp/*
